@@ -7,14 +7,21 @@
 
 import Firebase
 import UIKit
+import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // Running the app without Main.Storyboard
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        let vc = TabBarViewController()
+        window.rootViewController = vc
+        self.window = window
+        self.window?.makeKeyAndVisible()
         
         FirebaseApp.configure()
         
