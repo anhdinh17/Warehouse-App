@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		679E973B2806095D001E1B11 /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */; };
 		679E973E280617D8001E1B11 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E973D280617D8001E1B11 /* Constant.swift */; };
+		679E974028067291001E1B11 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E973F28067291001E1B11 /* HomePageViewModel.swift */; };
 		67D3FB9527FFD66F00E99C56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D3FB9427FFD66F00E99C56 /* AppDelegate.swift */; };
 		67D3FB9727FFD66F00E99C56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D3FB9627FFD66F00E99C56 /* SceneDelegate.swift */; };
 		67D3FB9927FFD66F00E99C56 /* ImportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D3FB9827FFD66F00E99C56 /* ImportViewController.swift */; };
@@ -28,6 +29,7 @@
 		4F9515D2F1B7FC0C4BD5D138 /* Pods-Warehouse App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warehouse App.release.xcconfig"; path = "Target Support Files/Pods-Warehouse App/Pods-Warehouse App.release.xcconfig"; sourceTree = "<group>"; };
 		679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		679E973D280617D8001E1B11 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		679E973F28067291001E1B11 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
 		67D3FB9127FFD66F00E99C56 /* Warehouse App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Warehouse App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		67D3FB9427FFD66F00E99C56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67D3FB9627FFD66F00E99C56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,9 +97,9 @@
 		67D3FB9327FFD66F00E99C56 /* Warehouse App */ = {
 			isa = PBXGroup;
 			children = (
-				679E973C280617C5001E1B11 /* Others */,
 				67D3FBA227FFD67200E99C56 /* Info.plist */,
 				67D4F0F728051DFC004B986B /* Resources */,
+				679E973C280617C5001E1B11 /* Others */,
 				67D4F0EE28051CF4004B986B /* View */,
 				67D4F0CB2803B721004B986B /* Managers */,
 			);
@@ -122,6 +124,7 @@
 				67D4F0F528051DCB004B986B /* ExportViewController.swift */,
 				67D4F0EF28051D28004B986B /* TabBarViewController.swift */,
 				679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */,
+				679E973F28067291001E1B11 /* HomePageViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				67D4F0F028051D28004B986B /* TabBarViewController.swift in Sources */,
 				67D4F0F228051D86004B986B /* HomeViewController.swift in Sources */,
 				67D3FB9727FFD66F00E99C56 /* SceneDelegate.swift in Sources */,
+				679E974028067291001E1B11 /* HomePageViewModel.swift in Sources */,
 				679E973E280617D8001E1B11 /* Constant.swift in Sources */,
 				679E973B2806095D001E1B11 /* HomePageCollectionViewCell.swift in Sources */,
 				67D4F0F428051DBA004B986B /* UpdateViewController.swift in Sources */,
