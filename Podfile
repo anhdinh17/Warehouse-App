@@ -12,4 +12,5 @@ target 'Warehouse App' do
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
+	pod 'CDAlertView'
 end

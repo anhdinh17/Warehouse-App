@@ -12,4 +12,6 @@ struct Constant {
     let itemLabel = "Item: "
     let qtyLabel = "Quantity: "
     let originalPricePerItem = "Original Price: "
+    let currentItemsInStore = "Current Items In Store:"
+    let addNewItem = "Add New Item"
 }

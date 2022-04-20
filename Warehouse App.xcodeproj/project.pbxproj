@@ -76,6 +76,14 @@
 			path = Others;
 			sourceTree = "<group>";
 		};
+		679E976928104B6A001E1B11 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				679E973F28067291001E1B11 /* HomePageViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		67D3FB8827FFD66F00E99C56 = {
 			isa = PBXGroup;
 			children = (
@@ -101,6 +109,7 @@
 				67D4F0F728051DFC004B986B /* Resources */,
 				679E973C280617C5001E1B11 /* Others */,
 				67D4F0EE28051CF4004B986B /* View */,
+				679E976928104B6A001E1B11 /* ViewModel */,
 				67D4F0CB2803B721004B986B /* Managers */,
 			);
 			path = "Warehouse App";
@@ -124,7 +133,6 @@
 				67D4F0F528051DCB004B986B /* ExportViewController.swift */,
 				67D4F0EF28051D28004B986B /* TabBarViewController.swift */,
 				679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */,
-				679E973F28067291001E1B11 /* HomePageViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

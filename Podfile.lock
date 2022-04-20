@@ -1,4 +1,5 @@
 PODS:
+  - CDAlertView (0.11.0)
   - Firebase/Analytics (6.34.0):
     - Firebase/Core
   - Firebase/Auth (6.34.0):
@@ -95,6 +96,7 @@ PODS:
   - PromisesObjC (1.2.11)
 
 DEPENDENCIES:
+  - CDAlertView
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -104,6 +106,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - CDAlertView
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -122,6 +125,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  CDAlertView: cd6624e857c85ad14560e2cd23d7eb25b983b590
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
   FirebaseAnalytics: 3bb096873ee0d7fa4b6c70f5e9166b6da413cc7f
   FirebaseAuth: c92d49ada7948d1a23466e3db17bc4c2039dddc3
@@ -139,6 +143,6 @@ SPEC CHECKSUMS:
   nanopb: 59317e09cf1f1a0af72f12af412d54edf52603fc
   PromisesObjC: 8c196f5a328c2cba3e74624585467a557dcb482f
 
-PODFILE CHECKSUM: 98261389d563553b77916ff936ade2e177f8c1a1
+PODFILE CHECKSUM: c14d3e899ee461aeb455db1b242fdd74ec758db9
 
 COCOAPODS: 1.11.3

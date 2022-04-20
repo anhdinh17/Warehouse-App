@@ -9,10 +9,11 @@ import Foundation
 
 class HomePageViewModel: NSObject {
     var item: [String:Any]
-    var dictionaryArray = [[String:Int]]()
+    var itemID: String
     
-    init(item: [String:Any]){
+    init(item: [String:Any], itemID: String){
         self.item = item
+        self.itemID = itemID
         super.init()
     }
 }
