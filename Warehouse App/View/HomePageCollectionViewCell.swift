@@ -75,7 +75,7 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     //=======================================================================================================
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .lightGray
+        contentView.backgroundColor = .tertiaryLabel
         contentView.addSubview(itemLabel)
         contentView.addSubview(itemNameLabel)
         contentView.addSubview(priceLabel)

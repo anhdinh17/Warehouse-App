@@ -39,10 +39,11 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
     
     private let addButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add Item", for: .normal)
+        button.setTitle("ADD ITEM", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
         button.backgroundColor = .link
         button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 8
         button.addTarget(self, action: #selector(didTapAddButton), for: .touchUpInside)
         return button
     }()
@@ -91,9 +92,14 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
         guard let item = itemTextField.text, let itemQty = Int(quantityTextField.text ?? "") else {
             return
         }
-        DatabaseManager.shared.insertItems(item: item, quantity: itemQty) { success in
+        DatabaseManager.shared.insertItems(item: item, quantity: itemQty) { [weak self] success in
             if success {
-                print("Inserted data into Firebase")
+                NotificationCenter.default.post(name: NSNotification.Name("addNewItem"), object: nil)
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Cannot insert items into store, please try again later", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "Dismiss", style: .cancel, handler: nil)
+                alert.addAction(alertAction)
+                self?.present(alert, animated: true)
             }
         }
         itemTextField.text = nil
@@ -103,7 +109,6 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
     @objc func didTapDoneButton(){
         itemTextField.resignFirstResponder()
         quantityTextField.resignFirstResponder()
-        NotificationCenter.default.post(name: NSNotification.Name("addNewItem"), object: nil)
     }
 }
 
