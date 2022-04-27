@@ -62,14 +62,23 @@ class ExportViewController: UIViewController {
         return button
     }()
     
+    private let receiverTableView: UITableView = {
+        let table = UITableView()
+        table.register(ReceiverTableViewCell.self, forCellReuseIdentifier: ReceiverTableViewCell.identifier)
+        return table
+    }()
+    
     let dropdown = DropDown()
     var arrayOfItem: [[String : Any]] = []
+    var receiverArray: [ReceiverViewModel] = []
+    
 //MARK: - Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         setupUI()
         setupDropDown()
+        fetchDataOfReceiver()
     }
     
     override func viewDidLayoutSubviews() {
@@ -79,6 +88,7 @@ class ExportViewController: UIViewController {
         receiverTextField.frame = CGRect(x: 10, y: sendLabel.frame.origin.y + sendLabel.frame.height + 10, width: view.frame.width - 20, height: 50)
         itemQuantityTextField.frame = CGRect(x: 10, y: receiverTextField.frame.origin.y + receiverTextField.frame.height + 70 , width: view.frame.width - 20, height: 50)
         sendButton.frame = CGRect(x: 10, y: itemQuantityTextField.frame.origin.y + itemQuantityTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
+        receiverTableView.frame = CGRect(x: 10, y: sendButton.frame.origin.y + sendButton.frame.height + 25, width: view.frame.width - 20, height: 0.55*view.frame.height - (tabBarController?.tabBar.frame.size.height ?? 0))
     }
     
 //MARK: - Functions
@@ -88,6 +98,9 @@ class ExportViewController: UIViewController {
         view.addSubview(itemQuantityTextField)
         view.addSubview(dropDownView)
         view.addSubview(sendButton)
+        view.addSubview(receiverTableView)
+        receiverTableView.delegate = self
+        receiverTableView.dataSource = self 
         // Add tool bar on top of keyboard
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
         toolbar.items = [
@@ -142,17 +155,28 @@ class ExportViewController: UIViewController {
                 return
             }
 
-            Utils.shared.checkIfItemIsEnoughToSend(arrayOfItems: arrayOfItem, item: item, quantity: Int(itemQuantity) ?? 0) { success in
+            Utils.shared.checkIfItemIsEnoughToSend(arrayOfItems: arrayOfItem, item: item, quantity: Int(itemQuantity) ?? 0) { [weak self] success in
                 if success{
-                    DatabaseManager.shared.storeTransaction(receiverName: receiverName, item: item, quantity: Int(itemQuantity) ?? 0) { success in
+                    var date = Utils.shared.getCurrentDateAndTime()
+                    DatabaseManager.shared.storeTransaction(receiverName: receiverName, item: item, quantity: Int(itemQuantity) ?? 0,date: date) { [weak self] success in
                         if success {
-                            Utils.shared.popUpAlertWithSuccessAndDismiss(viewController: self, alertMessage: Constant.shared.successfullySendingItemToReceiver)
+                            // Create an alert to tell users that item has been sent successfully and update tableView with transaction info
+                            let alert = UIAlertController(title: "Congratulation", message: "Your item has been sent successfully", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "Dismiss", style: .default) { _ in
+                                DispatchQueue.main.async {
+                                    //add this transaction item as dictionary [String:Any] to array and reload tableView
+                                    self?.receiverArray.append(ReceiverViewModel(transactionInfo: [receiverName:["Date":date,"Item":item,"Quantity":Int(itemQuantity)]]))
+                                    self?.receiverTableView.reloadData()
+                                }
+                            }
+                            alert.addAction(action)
+                            self?.present(alert,animated: true)
                         } else {
-                            Utils.shared.popUpAlertWithErrorAndDismiss(viewController: self, alertMessage: Constant.shared.errorSendingItemToReceiver)
+                            Utils.shared.popUpAlertWithErrorAndDismiss(viewController: self!, alertMessage: Constant.shared.errorSendingItemToReceiver)
                         }
                     }
                 } else {
-                    Utils.shared.popUpAlertWithErrorAndDismiss(viewController: self, alertMessage: Constant.shared.notEnoughItemToSend)
+                    Utils.shared.popUpAlertWithErrorAndDismiss(viewController: self!, alertMessage: Constant.shared.notEnoughItemToSend)
                 }
             }
             
@@ -165,5 +189,42 @@ class ExportViewController: UIViewController {
             alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
             present(alert, animated: true)
         }
+    }
+    
+    func fetchDataOfReceiver(){
+        DatabaseManager.shared.readDataFromReceivers { [weak self] values in
+            // values la 1 thang big dictionary, chua toan bo nhung gi under "Receivers" node
+            // lay tung thang (key,value) trong cai big dictionary nay de store vao array
+            for (key,value) in values {
+                self?.receiverArray.append(ReceiverViewModel(transactionInfo: [key:value]))
+            }
+            DispatchQueue.main.async {
+                self?.receiverTableView.reloadData()
+            }
+        }
+    }
+}
+
+//MARK: - Extension TableView
+extension ExportViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return receiverArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ReceiverTableViewCell.identifier, for: indexPath) as? ReceiverTableViewCell else {
+            return UITableViewCell()
+        }
+        let model = receiverArray[indexPath.row]
+        cell.configure(viewModel: model)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 140
     }
 }

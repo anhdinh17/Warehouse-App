@@ -20,4 +20,8 @@ struct Constant {
     let successfullySendingItemToReceiver = "Successfully sending item to receiver."
     let errorSendingItemToReceiver = "Unable to send the selected item to receiver."
     let notEnoughItemToSend = "The item you selected doesn't have enough quantity left in store."
+    let receiverLabel = "Receiver: "
+    let sentItemLabel = "Sent Item: "
+    let quantityOfSentItemLabel = "Quantity: "
+    let dateSentItemLabel = "Date: "
 }

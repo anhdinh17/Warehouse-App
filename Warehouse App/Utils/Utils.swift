@@ -45,4 +45,16 @@ class Utils: NSObject {
         }
     }
     
+    public func getCurrentDateAndTime() -> String {
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM/dd/yyyy"
+        let convertedDate = dateFormatter.string(from: today)
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: today)
+        let minute = calendar.component(.minute, from: today)
+        let second = calendar.component(.second, from: today)
+        return "\(convertedDate) \(hour):\(minute):\(second)"
+    }
+    
 }
