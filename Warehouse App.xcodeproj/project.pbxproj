@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6762F0BF2854D45900954F5B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762F0BE2854D45900954F5B /* SignInViewController.swift */; };
+		6762F0C22854E4CB00954F5B /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762F0C12854E4CB00954F5B /* AuthButton.swift */; };
+		6762F0C42854F2D600954F5B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762F0C32854F2D600954F5B /* SignUpViewController.swift */; };
+		6762F0C728567C0D00954F5B /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762F0C628567C0D00954F5B /* AuthManager.swift */; };
 		679E973B2806095D001E1B11 /* HomePageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */; };
 		679E973E280617D8001E1B11 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E973D280617D8001E1B11 /* Constant.swift */; };
 		679E974028067291001E1B11 /* HomePageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E973F28067291001E1B11 /* HomePageViewModel.swift */; };
@@ -24,7 +28,7 @@
 		67D4F0CD2803B736004B986B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4F0CC2803B736004B986B /* DatabaseManager.swift */; };
 		67D4F0F028051D28004B986B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4F0EF28051D28004B986B /* TabBarViewController.swift */; };
 		67D4F0F228051D86004B986B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4F0F128051D86004B986B /* HomeViewController.swift */; };
-		67D4F0F428051DBA004B986B /* UpdateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4F0F328051DBA004B986B /* UpdateViewController.swift */; };
+		67D4F0F428051DBA004B986B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4F0F328051DBA004B986B /* SettingsViewController.swift */; };
 		67D4F0F628051DCC004B986B /* ExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D4F0F528051DCB004B986B /* ExportViewController.swift */; };
 		67D9899A280141320029CAF9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D98999280141320029CAF9 /* SecondViewController.swift */; };
 		8F7E347CC9799EEB393C22AD /* Pods_Warehouse_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 771E629D6B487A40C4C058DB /* Pods_Warehouse_App.framework */; };
@@ -32,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		4F9515D2F1B7FC0C4BD5D138 /* Pods-Warehouse App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Warehouse App.release.xcconfig"; path = "Target Support Files/Pods-Warehouse App/Pods-Warehouse App.release.xcconfig"; sourceTree = "<group>"; };
+		6762F0BE2854D45900954F5B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		6762F0C12854E4CB00954F5B /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
+		6762F0C32854F2D600954F5B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		6762F0C628567C0D00954F5B /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageCollectionViewCell.swift; sourceTree = "<group>"; };
 		679E973D280617D8001E1B11 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		679E973F28067291001E1B11 /* HomePageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageViewModel.swift; sourceTree = "<group>"; };
@@ -51,7 +59,7 @@
 		67D4F0CC2803B736004B986B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		67D4F0EF28051D28004B986B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		67D4F0F128051D86004B986B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		67D4F0F328051DBA004B986B /* UpdateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateViewController.swift; sourceTree = "<group>"; };
+		67D4F0F328051DBA004B986B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		67D4F0F528051DCB004B986B /* ExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportViewController.swift; sourceTree = "<group>"; };
 		67D98999280141320029CAF9 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		771E629D6B487A40C4C058DB /* Pods_Warehouse_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Warehouse_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +84,23 @@
 				771E629D6B487A40C4C058DB /* Pods_Warehouse_App.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6762F0C02854E4B600954F5B /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				6762F0C12854E4CB00954F5B /* AuthButton.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		6762F0C52854FF4A00954F5B /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				6762F0BE2854D45900954F5B /* SignInViewController.swift */,
+				6762F0C32854F2D600954F5B /* SignUpViewController.swift */,
+			);
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		679E973C280617C5001E1B11 /* Others */ = {
@@ -140,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				67D4F0CC2803B736004B986B /* DatabaseManager.swift */,
+				6762F0C628567C0D00954F5B /* AuthManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -147,10 +173,12 @@
 		67D4F0EE28051CF4004B986B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6762F0C52854FF4A00954F5B /* Authentication */,
+				6762F0C02854E4B600954F5B /* Other */,
 				67D3FB9827FFD66F00E99C56 /* ImportViewController.swift */,
 				67D98999280141320029CAF9 /* SecondViewController.swift */,
 				67D4F0F128051D86004B986B /* HomeViewController.swift */,
-				67D4F0F328051DBA004B986B /* UpdateViewController.swift */,
+				67D4F0F328051DBA004B986B /* SettingsViewController.swift */,
 				67D4F0F528051DCB004B986B /* ExportViewController.swift */,
 				67D4F0EF28051D28004B986B /* TabBarViewController.swift */,
 				679E973A2806095D001E1B11 /* HomePageCollectionViewCell.swift */,
@@ -297,22 +325,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				67D9899A280141320029CAF9 /* SecondViewController.swift in Sources */,
+				6762F0C728567C0D00954F5B /* AuthManager.swift in Sources */,
 				679E976B2812ED01001E1B11 /* DropDownView.swift in Sources */,
 				67D3FB9927FFD66F00E99C56 /* ImportViewController.swift in Sources */,
 				67D4F0F628051DCC004B986B /* ExportViewController.swift in Sources */,
 				67D4F0CD2803B736004B986B /* DatabaseManager.swift in Sources */,
 				679E976F28134C27001E1B11 /* Utils.swift in Sources */,
 				67D3FB9527FFD66F00E99C56 /* AppDelegate.swift in Sources */,
+				6762F0C22854E4CB00954F5B /* AuthButton.swift in Sources */,
 				67D4F0F028051D28004B986B /* TabBarViewController.swift in Sources */,
 				67D4F0F228051D86004B986B /* HomeViewController.swift in Sources */,
 				679E976D28134967001E1B11 /* PaddingLabel.swift in Sources */,
 				67D3FB9727FFD66F00E99C56 /* SceneDelegate.swift in Sources */,
 				679E974028067291001E1B11 /* HomePageViewModel.swift in Sources */,
 				679E979428179D53001E1B11 /* ReceiverViewModel.swift in Sources */,
+				6762F0C42854F2D600954F5B /* SignUpViewController.swift in Sources */,
 				679E973E280617D8001E1B11 /* Constant.swift in Sources */,
+				6762F0BF2854D45900954F5B /* SignInViewController.swift in Sources */,
 				679E973B2806095D001E1B11 /* HomePageCollectionViewCell.swift in Sources */,
 				679E979228178905001E1B11 /* ReceiverTableViewCell.swift in Sources */,
-				67D4F0F428051DBA004B986B /* UpdateViewController.swift in Sources */,
+				67D4F0F428051DBA004B986B /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

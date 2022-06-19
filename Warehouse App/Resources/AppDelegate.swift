@@ -11,20 +11,17 @@ import FirebaseAuth
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
         // Running the app without Main.Storyboard
         let window = UIWindow(frame: UIScreen.main.bounds)
         let vc = TabBarViewController()
-        window.rootViewController = vc
+        let navVC = UINavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
+        window.rootViewController = navVC
         self.window = window
         self.window?.makeKeyAndVisible()
-        
         FirebaseApp.configure()
-        
         return true
     }
 
