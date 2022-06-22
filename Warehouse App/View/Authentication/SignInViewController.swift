@@ -125,9 +125,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func didTapCreateAccount(){
+        print("Create account is tapped")
         let vc = SignUpViewController()
         vc.title = "Sign Up"
-        navigationController?.pushViewController(vc, animated: true)
+//        navigationController?.pushViewController(vc, animated: true)
+        present(vc,animated: true)
     }
     
     @objc func didTapKeyboardDone(){

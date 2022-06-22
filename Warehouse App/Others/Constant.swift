@@ -24,4 +24,5 @@ struct Constant {
     let sentItemLabel = "Sent Item: "
     let quantityOfSentItemLabel = "Quantity: "
     let dateSentItemLabel = "Date: "
+    let noItemMessageLabel = "You don't have any items in store."
 }

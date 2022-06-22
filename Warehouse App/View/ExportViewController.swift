@@ -42,7 +42,7 @@ class ExportViewController: UIViewController {
     lazy var dropDownView: DropDownView = {
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.size.height
         let navBarHeight: CGFloat = navigationController?.navigationBar.bounds.height ?? 0
-        let view = DropDownView(frame: CGRect(x: 10, y: statusBarHeight + navBarHeight + 100, width: UIScreen.main.bounds.width - 20, height: 50))
+        let view = DropDownView(frame: .zero)
         view.labelSize = CGSize(width: UIScreen.main.bounds.width - 20, height: 50)
         view.layer.cornerRadius = 8
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapDropDownView))
@@ -78,7 +78,12 @@ class ExportViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         setupDropDown()
-        fetchDataOfReceiver()
+        let isFirstTimeLoginExport = !UserDefaults.standard.bool(forKey: "firstTime")
+        guard isFirstTimeLoginExport else {
+            // only fetch data if it's not the first time going to this screen
+            fetchDataOfReceiver()
+            return
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -86,7 +91,8 @@ class ExportViewController: UIViewController {
         sendLabel.sizeToFit()
         sendLabel.frame = CGRect(x: 10, y: view.safeAreaInsets.top + 10, width: sendLabel.frame.width, height: sendLabel.frame.height)
         receiverTextField.frame = CGRect(x: 10, y: sendLabel.frame.origin.y + sendLabel.frame.height + 10, width: view.frame.width - 20, height: 50)
-        itemQuantityTextField.frame = CGRect(x: 10, y: receiverTextField.frame.origin.y + receiverTextField.frame.height + 70 , width: view.frame.width - 20, height: 50)
+        dropDownView.frame = CGRect(x: 10, y: receiverTextField.frame.origin.y + receiverTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
+        itemQuantityTextField.frame = CGRect(x: 10, y: dropDownView.frame.origin.y + dropDownView.frame.height + 10 , width: view.frame.width - 20, height: 50)
         sendButton.frame = CGRect(x: 10, y: itemQuantityTextField.frame.origin.y + itemQuantityTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
         receiverTableView.frame = CGRect(x: 10, y: sendButton.frame.origin.y + sendButton.frame.height + 25, width: view.frame.width - 20, height: 0.55*view.frame.height - (tabBarController?.tabBar.frame.size.height ?? 0))
     }
@@ -163,6 +169,10 @@ class ExportViewController: UIViewController {
                             // Create an alert to tell users that item has been sent successfully and update tableView with transaction info
                             let alert = UIAlertController(title: "Congratulation", message: "Your item has been sent successfully", preferredStyle: .alert)
                             let action = UIAlertAction(title: "Dismiss", style: .default) { _ in
+                                
+                                // Set bool value to true to handle first time log in scenario
+                                UserDefaults.standard.set(true,forKey: "firstTime")
+                                
                                 DispatchQueue.main.async {
                                     //add this transaction item as dictionary [String:Any] to array and reload tableView
                                     self?.receiverArray.append(ReceiverViewModel(transactionInfo: [receiverName:["Date":date,"Item":item,"Quantity":Int(itemQuantity)]]))

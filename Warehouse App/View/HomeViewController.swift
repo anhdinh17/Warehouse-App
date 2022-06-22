@@ -19,6 +19,14 @@ class HomeViewController: UIViewController {
         return label
     }()
     
+    lazy var noItemsMessageLabel: UILabel = {
+        let label = UILabel()
+        label.text = Constant.shared.noItemMessageLabel
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.textColor = .lightGray
+        return label
+    }()
+    
     lazy private var collectionView: UICollectionView = {
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.width - 20, height: 120)
@@ -54,6 +62,8 @@ class HomeViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         currentItemsLabel.frame = CGRect(x: 10, y: view.safeAreaInsets.top + 5, width: view.frame.width, height: 20)
+        noItemsMessageLabel.sizeToFit()
+        noItemsMessageLabel.frame = CGRect(x: (view.frame.width-noItemsMessageLabel.frame.width)/2, y: (view.frame.height-noItemsMessageLabel.frame.height)/2, width: view.frame.width - 20, height: noItemsMessageLabel.frame.height)
         let navBarHeight = navigationController?.navigationBar.bounds.height ?? 0
         let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
         collectionView.frame = CGRect(x: 0,
@@ -68,11 +78,14 @@ class HomeViewController: UIViewController {
     func setUpUI(){
         view.addSubview(collectionView)
         view.addSubview(currentItemsLabel)
+        view.addSubview(noItemsMessageLabel)
     }
     
     func getDataForViewModelArray(){
         DatabaseManager.shared.readItems{ [weak self] (values,id) in
             if let values = values, let id = id {
+                // hide no-item message
+                self?.noItemsMessageLabel.isHidden = true
                 // print("values in HomeVC: \(values)") ---> print dong nay ra se thay dictionary tra ve la tung thang dictionary rieng re, ko hieu sao lai tra ve kieu nay thay vi la 1 whole dictionary
                 // THOUGHT: values tra ve la tung thang dictionary, nen moi lan tra ve minh append vo array of homePageViewModel
                 self?.homePageViewModelArray.append(HomePageViewModel(item: values,itemID: id))
@@ -130,7 +143,6 @@ extension HomeViewController: HomePageCollectionViewCellDelegate {
                     return
                 }
                 DatabaseManager.shared.updateNewQuantity(item: item,id: itemID, newQuantity: Int(itemNewQuantity) ?? 0){ [weak self]  success in
-                    print("Success: \(success)")
                     if success {
                         DispatchQueue.main.async {
                             // clear array and refetch data

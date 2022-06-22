@@ -46,6 +46,7 @@ class AuthManager {
             }
             completion(true)
         }
+        UserDefaults.standard.set(username,forKey: "username")
     }
     
     func signOut(completion: @escaping(Bool)->Void){
