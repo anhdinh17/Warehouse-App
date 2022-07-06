@@ -8,18 +8,26 @@
 import UIKit
 
 class TabBarViewController: UITabBarController {
-
-    private var signInPresented = false
     
+ //MARK: - Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpControllers()
+        var username = UserDefaults.standard.string(forKey: "username")
+        print("USERNAME: \(username)")
     }
     
+    /*
+     check if users already signed in or not, if users not signed in, we navigate to SignInVC. If users already signed in, TabBarVC will be shown.
+     ======> Can't put this in viewDidLoad, error!!!!
+     */
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !signInPresented {
-            presentSignInIfNeeded()
+        if !AuthManager.shared.isSignedIn{
+            let vc = SignInViewController()
+            let navVC = UINavigationController(rootViewController: vc)
+            navVC.modalPresentationStyle = .fullScreen
+            present(navVC,animated: true)
         }
     }
 
@@ -30,8 +38,9 @@ class TabBarViewController: UITabBarController {
     func presentSignInIfNeeded(){
         if !AuthManager.shared.isSignedIn{
             let vc = SignInViewController()
-            vc.modalPresentationStyle = .fullScreen
-            present(vc,animated: true)
+            let navVC = UINavigationController(rootViewController: vc)
+            navVC.modalPresentationStyle = .fullScreen
+            present(navVC,animated: true)
         }
     }
     

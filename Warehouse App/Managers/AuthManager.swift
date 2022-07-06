@@ -27,7 +27,6 @@ class AuthManager {
             guard result != nil, error == nil else {
                 if let error = error {
                     print("Error in AuthManager for Sign In")
-                    print(error)
                     completion(.failure(error))
                 }
                 return

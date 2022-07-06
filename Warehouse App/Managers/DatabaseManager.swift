@@ -25,9 +25,10 @@ final class DatabaseManager {
         database.child(username).child("Items").childByAutoId().observeSingleEvent(of: .value) { [weak self] snapshot in
             // check if there's a node of "Items" and its value
             guard var itemsDictionary = snapshot.value as? [String:Any] else {
-                // Nếu ko có "Items", tạo node "Items"
+                // Nếu ko có node username và node "Items", tạo node username và node "Items"
                 // childByAutoID() generates an auto unique ID for each node of an item.
                 self?.database.child(username).child("Items").childByAutoId().setValue(
+                    // Đây là structure mà mình muốn dưới 1 node
                     [
                         "Item": item,
                         "Quantity":quantity

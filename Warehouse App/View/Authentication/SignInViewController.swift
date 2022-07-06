@@ -50,7 +50,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         setupButtonActions()
         configureFields()
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         emailTextField.frame = CGRect(x: 15, y: view.safeAreaInsets.top + 10, width: view.frame.width - 30, height: 50)
@@ -93,6 +93,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         // Condition for text fields
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
+              !email.isEmpty,
+              !password.isEmpty,
               !email.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty,
               password.count >= 8 else {

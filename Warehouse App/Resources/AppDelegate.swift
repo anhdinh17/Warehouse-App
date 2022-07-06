@@ -15,10 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Running the app without Main.Storyboard
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let vc = TabBarViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        navVC.modalPresentationStyle = .fullScreen
-        window.rootViewController = navVC
+        window.rootViewController = TabBarViewController()
+//        window.rootViewController = SignInViewController()
         self.window = window
         self.window?.makeKeyAndVisible()
         FirebaseApp.configure()

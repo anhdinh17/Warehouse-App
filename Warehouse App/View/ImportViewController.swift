@@ -94,6 +94,7 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
         }
         DatabaseManager.shared.insertItems(item: item, quantity: itemQty) { [weak self] success in
             if success {
+                // Notification so that in HomeViewVC, tableView is updated
                 NotificationCenter.default.post(name: NSNotification.Name("addNewItem"), object: nil)
             } else {
                 let alert = UIAlertController(title: "Error", message: "Cannot insert items into store, please try again later", preferredStyle: .alert)

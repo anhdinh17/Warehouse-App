@@ -18,10 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        let vc = TabBarViewController()
-        let navVC = UINavigationController(rootViewController: vc)
-        navVC.modalPresentationStyle = .fullScreen
-        window.rootViewController = navVC
+        window.rootViewController = TabBarViewController()
+        //window.rootViewController = SignInViewController()
         self.window = window
         self.window?.makeKeyAndVisible()
         

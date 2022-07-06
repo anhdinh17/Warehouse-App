@@ -93,7 +93,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @objc func didTapSignUp(){
         didTapKeyboardDone()
-        guard let username = usernameTextField.text, let email = emailTextField.text, let password = emailTextField.text,
+        guard let username = usernameTextField.text, let email = emailTextField.text, let password = passwordTextField.text,
               !email.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty,
               !username.trimmingCharacters(in: .whitespaces).isEmpty,

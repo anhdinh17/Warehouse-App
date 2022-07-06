@@ -39,6 +39,7 @@ class SettingsViewController: UIViewController {
                 let vc = SignInViewController()
                 vc.modalPresentationStyle = .fullScreen
                 self?.present(vc, animated: true)
+                UserDefaults.standard.removeObject(forKey: "username")
             }else {
                 print("Error signing out")
             }
