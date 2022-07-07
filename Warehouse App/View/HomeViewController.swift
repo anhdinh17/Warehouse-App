@@ -52,7 +52,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setUpUI()
         getDataForViewModelArray()
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name("addNewItem"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getDataAfterAddingNewItem), name: NSNotification.Name("addNewItem"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
         view.addSubview(noItemsMessageLabel)
     }
     
-    func getDataForViewModelArray(){
+    @objc func getDataForViewModelArray(){
         DatabaseManager.shared.readItems{ [weak self] (values,id) in
             if let values = values, let id = id {
                 // hide no-item message
@@ -94,6 +94,14 @@ class HomeViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // refetch data after we add new item
+    @objc func getDataAfterAddingNewItem(){
+        // empty viewModel array first
+        homePageViewModelArray = []
+        // then refetch data
+        getDataForViewModelArray()
     }
     
     @objc func reloadCollectionView(){

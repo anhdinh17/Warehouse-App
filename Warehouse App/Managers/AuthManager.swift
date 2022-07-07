@@ -30,7 +30,15 @@ class AuthManager {
                     completion(.failure(error))
                 }
                 return
-            }            
+            }
+            
+            // Get the username corresponding to sign-in email
+            DatabaseManager.shared.getUsername(email: email) { [weak self] username in
+                if let username = username {
+                    UserDefaults.standard.set(username,forKey: "username")
+                }
+            }
+            
             completion(.success(email))
         }
     }
@@ -44,8 +52,12 @@ class AuthManager {
                 return
             }
             completion(true)
+            
         }
         UserDefaults.standard.set(username,forKey: "username")
+        
+        // add username and email to Realtime Database
+        DatabaseManager.shared.addEmailToRealtimeDatabase(email: email, username: username, completion: completion)
     }
     
     func signOut(completion: @escaping(Bool)->Void){

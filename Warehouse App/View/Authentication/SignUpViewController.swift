@@ -106,9 +106,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
         AuthManager.shared.signUp(username: username, email: email, password: password) { [weak self] result in
             if result{
-                let vc = TabBarViewController()
-                vc.modalPresentationStyle = .fullScreen
-                self?.present(vc,animated: true)
+                // Delay because it needs a couple of seconds to sign users in after successfully creating an account. if we don't set delay, after creating an account, SignInVC will pop up because it doesn't have enough time to be signed in, TabBarVC won't show in this case.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    let vc = TabBarViewController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.present(vc,animated: true)
+                }
             }else {
                 print("Cannot Sign up")
             }

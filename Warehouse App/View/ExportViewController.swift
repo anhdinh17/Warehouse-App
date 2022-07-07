@@ -78,12 +78,13 @@ class ExportViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         setupDropDown()
-        let isFirstTimeLoginExport = !UserDefaults.standard.bool(forKey: "firstTime")
-        guard isFirstTimeLoginExport else {
-            // only fetch data if it's not the first time going to this screen
-            fetchDataOfReceiver()
-            return
-        }
+//        let isFirstTimeLoginExport = !UserDefaults.standard.bool(forKey: "firstTime")
+//        guard isFirstTimeLoginExport else {
+//            // only fetch data if it's not the first time going to this screen
+//            fetchDataOfReceiver()
+//            return
+//        }
+        fetchDataOfReceiver()
     }
     
     override func viewDidLayoutSubviews() {
@@ -205,6 +206,9 @@ class ExportViewController: UIViewController {
         DatabaseManager.shared.readDataFromReceivers { [weak self] values in
             // values la 1 thang big dictionary, chua toan bo nhung gi under "Receivers" node
             // lay tung thang (key,value) trong cai big dictionary nay de store vao array
+            guard let values = values else {
+                return
+            }
             for (key,value) in values {
                 self?.receiverArray.append(ReceiverViewModel(transactionInfo: [key:value]))
             }
