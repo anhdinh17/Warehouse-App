@@ -16,12 +16,12 @@ final class DatabaseManager {
     private var readDataValues: [String:Int] = [:]
     
     // insert items into Realtime Database
-    public func insertItems(item: String, quantity: Int, completion: @escaping (Bool)->Void){
+    public func insertItems(item: String, quantity: Int, pricePerUnit: Int, completion: @escaping (Bool)->Void){
         
         guard let username = UserDefaults.standard.string(forKey: "username") else {
             return
         }
-        
+        // dừng ở node AutoID
         database.child("users").child(username).child("Items").childByAutoId().observeSingleEvent(of: .value) { [weak self] snapshot in
             // check if there's a node of "Items" and its value
             guard var itemsDictionary = snapshot.value as? [String:Any] else {
@@ -31,7 +31,8 @@ final class DatabaseManager {
                     // Đây là structure mà mình muốn dưới 1 node
                     [
                         "Item": item,
-                        "Quantity":quantity
+                        "Quantity":quantity,
+                        "Price per unit":pricePerUnit
                     ]
                 ){error,_ in
                     guard error == nil else {
@@ -46,6 +47,7 @@ final class DatabaseManager {
             }
             itemsDictionary["Item"] = item
             itemsDictionary["Quantity"] = quantity
+            itemsDictionary["Price per unit"] = pricePerUnit
             self?.database.child("users").child(username).child("Items").childByAutoId().setValue(itemsDictionary){ error,_ in
                 guard error == nil else {
                     completion(false)
@@ -65,7 +67,7 @@ final class DatabaseManager {
         
         // How to read data created with childByAutoId()
         // (withPath: "Items").observe(.childAdded) get what under "Items" including key and what underneath it
-        // snaphot.values la tung thang dictionary rieng re
+        // snaphot.values la tung thang dictionary rieng le
         Database.database().reference(withPath: "users/\(username)/Items").observe(.childAdded){snapshot in
             // snaphost.value = what underneath the key ID
             guard let values = snapshot.value as? [String:Any]  else {
@@ -152,6 +154,7 @@ final class DatabaseManager {
                 completion([:])
                 return
             }
+            print("snapshot.value from receiver: \(values)")
             completion(values as? [String : Any] ?? nil)
         }
         

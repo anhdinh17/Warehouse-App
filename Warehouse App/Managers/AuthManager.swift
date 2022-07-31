@@ -36,10 +36,9 @@ class AuthManager {
             DatabaseManager.shared.getUsername(email: email) { [weak self] username in
                 if let username = username {
                     UserDefaults.standard.set(username,forKey: "username")
+                    completion(.success(username))
                 }
             }
-            
-            completion(.success(email))
         }
     }
     

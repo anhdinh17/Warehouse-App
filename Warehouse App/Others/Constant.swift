@@ -11,7 +11,7 @@ struct Constant {
     static var shared = Constant()
     let itemLabel = "Item: "
     let qtyLabel = "Quantity: "
-    let originalPricePerItem = "Original Price: "
+    let originalPricePerItem = "Price per unit: "
     let currentItemsInStore = "Current Items In Store:"
     let addNewItem = "Add New Item"
     let sendLabel = "Send To"
@@ -25,4 +25,5 @@ struct Constant {
     let quantityOfSentItemLabel = "Quantity: "
     let dateSentItemLabel = "Date: "
     let noItemMessageLabel = "You don't have any items in store."
+    let noReceiverMessageLabel = "You don't have any receivers."
 }

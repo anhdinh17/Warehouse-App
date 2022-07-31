@@ -29,7 +29,18 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
     private let quantityTextField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .secondarySystemBackground
-        textField.placeholder = "Qty."
+        textField.placeholder = "Quantity"
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
+        textField.leftViewMode = .always
+        textField.layer.cornerRadius = 8
+        textField.keyboardType = .numberPad
+        return textField
+    }()
+    
+    private let pricePerUnitTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .secondarySystemBackground
+        textField.placeholder = "Price Per Unit"
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 50))
         textField.leftViewMode = .always
         textField.layer.cornerRadius = 8
@@ -57,11 +68,11 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        addNewItemLabel.frame = CGRect(x: 30, y: view.safeAreaInsets.top + 20, width: view.frame.width, height: 20)
-        itemTextField.frame = CGRect(x: 30, y: view.safeAreaInsets.top + 45, width: (3/5)*(view.frame.width), height: 50)
-        addButton.frame = CGRect(x: 30, y: itemTextField.frame.origin.y + itemTextField.frame.height + 10, width: view.frame.size.width - 60, height: 50)
-        var quantityTextFieldWidth: CGFloat = view.frame.size.width - 60 - itemTextField.frame.width - 15
-        quantityTextField.frame = CGRect(x: itemTextField.frame.origin.x + itemTextField.frame.width + 15, y: view.safeAreaInsets.top + 45, width: quantityTextFieldWidth, height: 50)
+        addNewItemLabel.frame = CGRect(x: 10, y: view.safeAreaInsets.top + 20, width: view.frame.width, height: 20)
+        itemTextField.frame = CGRect(x: 10, y: view.safeAreaInsets.top + 45, width: view.frame.width - 20, height: 50)
+        quantityTextField.frame = CGRect(x: 10, y: itemTextField.frame.origin.y + itemTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
+        pricePerUnitTextField.frame = CGRect(x: 10, y: quantityTextField.frame.origin.y + quantityTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
+        addButton.frame = CGRect(x: 10, y: pricePerUnitTextField.frame.origin.y + pricePerUnitTextField.frame.height + 10, width: view.frame.size.width - 20, height: 50)
 
     }
     
@@ -73,6 +84,7 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(itemTextField)
         view.addSubview(quantityTextField)
         view.addSubview(addButton)
+        view.addSubview(pricePerUnitTextField)
         itemTextField.delegate = self
         quantityTextField.delegate = self
         
@@ -89,10 +101,10 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func didTapAddButton(){
-        guard let item = itemTextField.text, let itemQty = Int(quantityTextField.text ?? "") else {
+        guard let item = itemTextField.text, let itemQty = Int(quantityTextField.text ?? ""), let pricePerUnit = Int(pricePerUnitTextField.text ?? ""), !item.isEmpty, itemQty != 0, pricePerUnit != 0 else {
             return
         }
-        DatabaseManager.shared.insertItems(item: item, quantity: itemQty) { [weak self] success in
+        DatabaseManager.shared.insertItems(item: item, quantity: itemQty, pricePerUnit: pricePerUnit) { [weak self] success in
             if success {
                 // Notification so that in HomeViewVC, tableView is updated
                 NotificationCenter.default.post(name: NSNotification.Name("addNewItem"), object: nil)
@@ -105,6 +117,7 @@ class ImportViewController: UIViewController, UITextFieldDelegate {
         }
         itemTextField.text = nil
         quantityTextField.text = nil
+        pricePerUnitTextField.text = nil
     }
     
     @objc func didTapDoneButton(){

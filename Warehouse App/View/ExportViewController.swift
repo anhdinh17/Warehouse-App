@@ -68,6 +68,15 @@ class ExportViewController: UIViewController {
         return table
     }()
     
+    lazy var noReceiverMessageLabel: UILabel = {
+        let label = UILabel()
+        label.text = Constant.shared.noReceiverMessageLabel
+        label.font = .systemFont(ofSize: 18, weight: .semibold)
+        label.textColor = .lightGray
+        label.textAlignment = .center
+        return label
+    }()
+    
     let dropdown = DropDown()
     var arrayOfItem: [[String : Any]] = []
     var receiverArray: [ReceiverViewModel] = []
@@ -78,12 +87,6 @@ class ExportViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setupUI()
         setupDropDown()
-//        let isFirstTimeLoginExport = !UserDefaults.standard.bool(forKey: "firstTime")
-//        guard isFirstTimeLoginExport else {
-//            // only fetch data if it's not the first time going to this screen
-//            fetchDataOfReceiver()
-//            return
-//        }
         fetchDataOfReceiver()
     }
     
@@ -95,6 +98,7 @@ class ExportViewController: UIViewController {
         dropDownView.frame = CGRect(x: 10, y: receiverTextField.frame.origin.y + receiverTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
         itemQuantityTextField.frame = CGRect(x: 10, y: dropDownView.frame.origin.y + dropDownView.frame.height + 10 , width: view.frame.width - 20, height: 50)
         sendButton.frame = CGRect(x: 10, y: itemQuantityTextField.frame.origin.y + itemQuantityTextField.frame.height + 10, width: view.frame.width - 20, height: 50)
+        noReceiverMessageLabel.frame = CGRect(x: 10, y: sendButton.frame.origin.y + sendButton.frame.height + 50, width: view.frame.width - 20, height: 50)
         receiverTableView.frame = CGRect(x: 10, y: sendButton.frame.origin.y + sendButton.frame.height + 25, width: view.frame.width - 20, height: 0.55*view.frame.height - (tabBarController?.tabBar.frame.size.height ?? 0))
     }
     
@@ -106,6 +110,7 @@ class ExportViewController: UIViewController {
         view.addSubview(dropDownView)
         view.addSubview(sendButton)
         view.addSubview(receiverTableView)
+        view.addSubview(noReceiverMessageLabel)
         receiverTableView.delegate = self
         receiverTableView.dataSource = self 
         // Add tool bar on top of keyboard
@@ -175,6 +180,8 @@ class ExportViewController: UIViewController {
                                 UserDefaults.standard.set(true,forKey: "firstTime")
                                 
                                 DispatchQueue.main.async {
+                                    // hide no receiver item
+                                    self?.noReceiverMessageLabel.isHidden = true
                                     //add this transaction item as dictionary [String:Any] to array and reload tableView
                                     self?.receiverArray.append(ReceiverViewModel(transactionInfo: [receiverName:["Date":date,"Item":item,"Quantity":Int(itemQuantity)]]))
                                     self?.receiverTableView.reloadData()

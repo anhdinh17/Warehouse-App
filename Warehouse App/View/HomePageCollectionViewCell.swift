@@ -104,12 +104,14 @@ class HomePageCollectionViewCell: UICollectionViewCell {
     
 //MARK: - Functions
     func configure(viewModel: HomePageViewModel){
-        var stringItemName: [String] = []
-        var stringItemQty: [Int] = []
-        stringItemName.append(viewModel.item["Item"] as! String)
-        stringItemQty.append(viewModel.item["Quantity"] as! Int)
-        itemNameLabel.text = stringItemName[0]
-        itemQuantityLabel.text = String(stringItemQty[0])
+        var stringItemName: String
+        var stringItemQty: Int
+        var stringPricePerUnit: Int
+        itemNameLabel.text = viewModel.item["Item"] as! String
+        stringItemQty = viewModel.item["Quantity"] as! Int
+        stringPricePerUnit = viewModel.item["Price per unit"] as! Int
+        itemQuantityLabel.text = String(stringItemQty)
+        itemOriginalPriceLabel.text = String(stringPricePerUnit)
         itemID = viewModel.itemID
     }
     

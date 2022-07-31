@@ -82,12 +82,13 @@ class HomeViewController: UIViewController {
     }
     
     @objc func getDataForViewModelArray(){
+        // THOUGHT: .readItems tra ve tung thang dictionary từ database(cách API này hoạt động) khi run nó, nên dùng append để mỗi lần trả về mình append dictionary vô viewModel
         DatabaseManager.shared.readItems{ [weak self] (values,id) in
             if let values = values, let id = id {
                 // hide no-item message
                 self?.noItemsMessageLabel.isHidden = true
-                // print("values in HomeVC: \(values)") ---> print dong nay ra se thay dictionary tra ve la tung thang dictionary rieng re, ko hieu sao lai tra ve kieu nay thay vi la 1 whole dictionary
-                // THOUGHT: values tra ve la tung thang dictionary, nen moi lan tra ve minh append vo array of homePageViewModel
+                 print("values in HomeVC: \(values)")
+                //---> print dong nay ra se thay dictionary tra ve la tung thang dictionary rieng re, ko hieu sao lai tra ve kieu nay thay vi la 1 whole dictionary
                 self?.homePageViewModelArray.append(HomePageViewModel(item: values,itemID: id))
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
