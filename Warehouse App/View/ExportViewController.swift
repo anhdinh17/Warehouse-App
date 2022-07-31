@@ -179,6 +179,10 @@ class ExportViewController: UIViewController {
                                 // Set bool value to true to handle first time log in scenario
                                 UserDefaults.standard.set(true,forKey: "firstTime")
                                 
+                                DatabaseManager.shared.subtractSentQuantityFromCurrentQuantity(item: item, sentQuantity: Int(itemQuantity) ?? 0) { success in
+                                    
+                                }
+                                
                                 DispatchQueue.main.async {
                                     // hide no receiver item
                                     self?.noReceiverMessageLabel.isHidden = true

@@ -52,11 +52,11 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .systemBackground
         setUpUI()
         getDataForViewModelArray()
-        NotificationCenter.default.addObserver(self, selector: #selector(getDataAfterAddingNewItem), name: NSNotification.Name("addNewItem"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(getDataAfterAddingNewItem), name: NSNotification.Name("addNewItem"), object: nil)
     }
     
     override func viewDidLayoutSubviews() {
@@ -133,7 +133,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //MARK: - Extension Protocol Functions
 extension HomeViewController: HomePageCollectionViewCellDelegate {
     func didTapUpdateButton(cell: HomePageCollectionViewCell) {
-        if let item = cell.itemNameLabel.text, let itemQuantity = cell.itemQuantityLabel.text, let itemID = cell.itemID {
+        if let item = cell.itemNameLabel.text,
+           let itemQuantity = cell.itemQuantityLabel.text,
+           let itemID = cell.itemID,
+           let itemPricePerUnit = cell.itemOriginalPriceLabel.text{
             let alert = UIAlertController(title: "Update", message: "Item: \(item)\nQuantity: \(itemQuantity)", preferredStyle: .alert)
             alert.addTextField { textField in
                 textField.placeholder = "Update new quantity"
@@ -151,7 +154,7 @@ extension HomeViewController: HomePageCollectionViewCellDelegate {
                     print("Error TextField")
                     return
                 }
-                DatabaseManager.shared.updateNewQuantity(item: item,id: itemID, newQuantity: Int(itemNewQuantity) ?? 0){ [weak self]  success in
+                DatabaseManager.shared.updateNewQuantity(item: item,id: itemID, newQuantity: Int(itemNewQuantity) ?? 0,pricePerUnit: Int(itemPricePerUnit) ?? 0){ [weak self]  success in
                     if success {
                         DispatchQueue.main.async {
                             // clear array and refetch data

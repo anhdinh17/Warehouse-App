@@ -67,7 +67,10 @@ final class DatabaseManager {
         
         // How to read data created with childByAutoId()
         // (withPath: "Items").observe(.childAdded) get what under "Items" including key and what underneath it
+        // snapshot la dictionary dang JSON, bao gom ID cua 1 thang item va nhung gi duoi ID do
         // snaphot.values la tung thang dictionary rieng le
+        // cu print snapshot and snapshot.values ra se hieu
+        // THOUGHT: vay khi goi func nay, no se di tu tren xuong duoi toi ID, doc dictionary trong ID do, roi lai tiep tuc di tu tren xuong duoi toi ID tiep theo, doc dictionary trong ID do.
         Database.database().reference(withPath: "users/\(username)/Items").observe(.childAdded){snapshot in
             // snaphost.value = what underneath the key ID
             guard let values = snapshot.value as? [String:Any]  else {
@@ -82,15 +85,16 @@ final class DatabaseManager {
     }
     
     // update quantity of current Items
-    public func updateNewQuantity(item: String,id: String,newQuantity: Int, completion: @escaping (Bool)->Void){
+    public func updateNewQuantity(item: String,id: String,newQuantity: Int,pricePerUnit: Int, completion: @escaping (Bool)->Void){
         
         guard let username = UserDefaults.standard.string(forKey: "username") else {
             return
         }
         
         let newQuantity = [
-            "Item":item,
-            "Quantity":newQuantity
+            "Item" : item,
+            "Quantity" : newQuantity,
+            "Price per unit" : pricePerUnit
         ] as [String : Any]
         database.child("users").child(username).child("Items").child(id).setValue(newQuantity){ error,_ in
             guard error == nil else {
@@ -201,6 +205,32 @@ final class DatabaseManager {
                     break
                 }
             }
+        }
+    }
+    
+    // Func to subtract sent quantity from current quantity
+    func subtractSentQuantityFromCurrentQuantity(item: String, sentQuantity: Int, completion: @escaping(Bool)->Void){
+        guard let username = UserDefaults.standard.string(forKey: "username") else {
+            return
+        }
+        
+        Database.database().reference(withPath: "users/\(username)/Items").observe(.childAdded){ [weak self] snapshot in
+            // snaphost.value = what underneath the key ID
+            guard let values = snapshot.value as? [String:Any]  else {
+                return
+            }
+            
+            var id = snapshot.key
+            if values["Item"] as! String == item {
+                let newQuantity = (values["Quantity"] as! Int) - sentQuantity
+                let pricePerUnit = values["Price per unit"] as! Int
+                self?.updateNewQuantity(item: item, id: id, newQuantity: newQuantity, pricePerUnit: pricePerUnit) { success in
+                    if success {
+                        print("Update after subtraction successfully")
+                    }
+                }
+            }
+            completion(true)
         }
     }
     
