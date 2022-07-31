@@ -57,6 +57,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(getDataAfterAddingNewItem), name: NSNotification.Name("addNewItem"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getDataAfterAddingNewItem), name: NSNotification.Name("updateAfterExporting"), object: nil)
     }
     
     override func viewDidLayoutSubviews() {

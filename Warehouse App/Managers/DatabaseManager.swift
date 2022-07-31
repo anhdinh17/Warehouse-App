@@ -226,7 +226,8 @@ final class DatabaseManager {
                 let pricePerUnit = values["Price per unit"] as! Int
                 self?.updateNewQuantity(item: item, id: id, newQuantity: newQuantity, pricePerUnit: pricePerUnit) { success in
                     if success {
-                        print("Update after subtraction successfully")
+                        // If success, use notification to update table in HomeviewController.
+                        NotificationCenter.default.post(name: NSNotification.Name("updateAfterExporting"), object: nil)
                     }
                 }
             }
